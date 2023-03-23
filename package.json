@@ -1,0 +1,25 @@
+{
+  "name": "webgpututorial",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.ts",
+  "scripts": {
+    "start": "npm run install-missing-dependencies && npm run build && npm run serve",
+    "install-missing-dependencies": "npm i",
+    "build": "webpack --config webpack.config.js",
+    "serve": "http-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^18.15.5",
+    "@webgpu/types": "^0.1.30",
+    "http-server": "^14.1.1",
+    "node": "^19.8.1",
+    "ts-loader": "^9.4.2",
+    "ts-shader-loader": "^2.0.2",
+    "typescript": "^5.0.2",
+    "webpack": "^5.76.3",
+    "webpack-cli": "5.0.1"
+  }
+}
