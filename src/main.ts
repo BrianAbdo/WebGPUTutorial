@@ -5,10 +5,11 @@ const Initialize = async () =>
 const canvas : HTMLCanvasElement = <HTMLCanvasElement> document.getElementById("gfx-main");
 
 if (navigator.gpu) {
-    console.log(canvas)
+    console.log(navigator.onLine)
+
     const adapter: GPUAdapter = <GPUAdapter>await navigator.gpu.requestAdapter();
     const device: GPUDevice = <GPUDevice> await adapter.requestDevice();
-    const context: GPUCanvasContext = <GPUCanvasContext> canvas.getContext("webgpu");
+    const context: GPUCanvasContext = <GPUCanvasContext> <unknown>canvas.getContext("webgpu");
     const format: GPUTextureFormat ="bgra8unorm";
 
     context.configure(
@@ -18,6 +19,7 @@ if (navigator.gpu) {
 }
 
     )
+
     const pipeline = device.createRenderPipeline(
     {
         vertex:
