@@ -15,10 +15,24 @@ if (navigator.gpu) {
     context.configure(
 {
         device:device,
-        format:format
+        format:format,
+        alphaMode:"opaque"
 }
 
     )
+    const bindGroupLayout = device.createBindGroupLayout(
+        {
+            entries:[]
+        }
+    );
+    const bindGroup = device.createBindGroup({
+        layout:bindGroupLayout,
+        entries:[]
+    });
+    const pipelineLayout = device.createPipelineLayout({
+        bindGroupLayouts:[bindGroupLayout],
+
+    });
 
     const pipeline = device.createRenderPipeline(
     {
@@ -43,7 +57,7 @@ if (navigator.gpu) {
         {
             topology:"triangle-list"
         },
-        layout: "auto"
+        layout: pipelineLayout
     }
     );
     const commandEncoder = device.createCommandEncoder();
@@ -58,6 +72,7 @@ if (navigator.gpu) {
     
     });
     renderPassEncoder.setPipeline(pipeline);
+    renderPassEncoder.setBindGroup(0,bindGroup);
     renderPassEncoder.draw(3, 1, 0, 0);
     renderPassEncoder.end();
     device.queue.submit([commandEncoder.finish()])
